@@ -20,7 +20,6 @@ def error500(e):
 
 # Challenge 4: Edit the 500.html template to display link to homepage and link to itunes-form.
 
-
 @app.route('/')
 def index():
     return "Hello, World!"
@@ -32,7 +31,22 @@ def ituneForm():
 
 @app.route('/itunes-result')
 def resultTunes():
-    pass
+    if request.method == 'GET':
+        baseurl = "https://itunes.apple.com/search?"
+        result = request.args
+        params = {}
+        params['term'] = result.get('artist')
+        params['limit'] = result.get('num')
+        resp = requests.get(baseurl, params = params)
+        data = json.loads(resp.text)
+        return render_template('list.html', results = data['results'])
+
+    # params_diction = {}
+    # params_diction["term"] = artist
+    # resp = requests.get(baseurl, params=params_diction)
+    # text = resp.text
+    # python_obj = json.loads(text)
+    # return str(python_obj)
 
 
 if __name__ == '__main__':
