@@ -7,6 +7,11 @@ app = Flask(__name__)
 # Challenge 1: Return the 404.html template
 # Edit it such that it displays an interesting message
 
+@app.errorhandler(404)
+def error404(e):
+    return render_template('404.html')
+
+
 # Challenge 2: Include the link to homepage i.e. http://localhost:5000 in 404.html.
 ## YOUR CODE HERE
 
@@ -23,6 +28,7 @@ def index():
 @app.route('/itunes-form')
 def ituneForm():
     return render_template('itunes-form.html')
+
 
 @app.route('/itunes-result')
 def resultTunes():
