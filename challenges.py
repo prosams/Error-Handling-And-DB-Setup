@@ -11,9 +11,9 @@ app = Flask(__name__)
 def error404(e):
     return render_template('404.html')
 
-
-# Challenge 2: Include the link to homepage i.e. http://localhost:5000 in 404.html.
-## YOUR CODE HERE
+@app.errorhandler(500)
+def error500(e):
+    return render_template('500.html')
 
 # Challenge 3: Write an error handler for 500 error
 ## YOUR CODE HERE
